@@ -1,0 +1,168 @@
+CASSANDRA PRACTICLE:
+
+
+1..CREATE KEYSPACE  [by default :DURABLE_WRITES=TRUE;]
+
+CREATE KEYSPACE tutorialspoint  WITH replication = {'class':'SimpleStrategy',
+ 'replication_factor' : 3};
+
+CREATE KEYSPACE test  ... WITH REPLICATION = { 'class' : 'NetworkTopologyStrategy',
+ 'datacenter1' : 3 } AND DURABLE_WRITES = false;
+
+2.TO SEE KEYSPACES?
+
+ describe keyspaces;
+
+3..USE KEYSPACE?
+
+use totorialspoint;
+USE TEST;
+
+4.TO SEE PROPERTIES OF KEYSPACES:
+SELECT * FROM system.schema_keyspaces;
+
+
+4...HOW TO ALTER PROPERTIES OF KEYSPACE?
+alter keyspace tutorialspoint WITH replication = {'class': 'NetworkTopologyStrategy',
+'replication_factor':3};
+
+alter keyspace test WITH replication = {'class': 'NetworkTopologyStrategy','datacentre1':2}
+ and 'durable_write':true;
+
+
+5.DROP KEYSPACE{DELETE ENTIRE KEYSPACE DATABASE}
+
+DROP KEYSPACE tutorialspoint;
+
+
+{B}..TABLES COMMANDS:
+
+
+
+create keyspace arvind with replication = {'class':'SimpleStrategy','replication_factor':3};
+USE arvind;
+
+1.CREATE TABLE:
+CREATE TABLE emp(
+          ... emp_id int PRIMARY KEY,
+          ... emp_name text,
+          ... emp_city text,
+          ... emp_sal varint,
+          ... emp_phone varint
+          ... ); 
+
+2.VERIFY TABLE:
+The select statement will give you the schema. Verify the table using the select
+statement as shown below
+select * from emp;
+
+ emp_id | emp_city | emp_name | emp_phone | emp_sal
+
+3..ALTER TABLE?
+
+Using ALTER command, you can perform the following operations:
+
+1] Add a column
+ ALTER TABLE emp ADD emp_email text;
+
+2] Drop a column
+ ALTER TABLE emp DROP emp_email;
+
+3] Update the options of a table using with keyword
+
+3.TROP TABLES
+ DROP TABLE emp;
+
+4..TO SHOW COLUMNFAMILY OR TABLE?
+ DESCRIBE COLUMNFAMILIES
+
+5.Truncating a Table
+You can truncate a table using the TRUNCATE command. When you truncate a
+table, all the rows of the table are deleted permanently. Given below is the syntax
+of this command. 
+
+ TRUNCATE student;
+
+5.CREATE INDEX
+ CREATE INDEX name ON emp (emp_name);
+
+6.DROP INDEX?
+ drop index INDEXNAME;
+
+drop index name;
+
+
+[7]...inser data /create data 
+insert into emp (emp_id,emp_name,emp_city,emp_sal,emp_phone) values 
+(3,'ramesh','hyderabad',31000,458458557815);
+insert into emp (emp_id,emp_name,emp_city,emp_sal,emp_phone) values
+ (1,'arvind','pune',30000,9545859379);
+
+
+
+[8]UPDATE DATA ?
+UPDATE is the command used to update data in a table. The following keywords
+are used while updating data in a table:
+ Where: This clause is used to select the row to be updated.
+ Set: Set the value using this keyword.
+ Must: Includes all the columns composing the primary key.
+
+Example::----
+update emp set emp_city='delhi',emp_sal=45000 where emp_id=3;
+
+[9] DELETE DATA FROM TABLE COLUMN
+
+DELETE emp_sal FROM emp WHERE emp_id=3;
+
+[10].Using Batch Statements
+Using BATCH, you can execute multiple modification statements (insert, update,
+delete) simultaneiously. Its syntax is as follows:
+
+BEGIN BATCH
+<insert-stmt>/ <update-stmt>/ <delete-stmt>
+APPLY BATCH
+
+BEGIN BATCH INSERT INTO emp (emp_id, emp_name, emp_city, emp_sal, emp_phone) 
+values( 4,'vishal','bangalore',20000, 1545851236)
+update emp set emp_sal =40000 where emp_id = 1 
+delete emp_phone from emp where emp_id = 1 
+apply batch;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
